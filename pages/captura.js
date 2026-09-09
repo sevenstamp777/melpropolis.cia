@@ -1,6 +1,6 @@
 import Layout from '../components/layout';
 import SEO from '../components/SEO';
-import CaptureForm from '../components/CaptureForm';
+import SendPulseForm from '../components/SendPulseForm';
 
 export default function CapturaPage() {
   return (
@@ -34,7 +34,7 @@ export default function CapturaPage() {
               <p className="text-[var(--muted)] text-sm text-center mb-8">
                 Preencha seus dados e ganhe o e-book "Imunidade Pós-Treino" com receitas exclusivas de própolis e mel.
               </p>
-              <CaptureForm />
+              <SendPulseForm />
             </div>
           </div>
         </section>

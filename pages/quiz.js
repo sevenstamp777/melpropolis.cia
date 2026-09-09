@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/SEO';
-import CaptureForm from '../components/CaptureForm';
+import SendPulseForm from '../components/SendPulseForm';
 
 export default function QuizPage() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -234,7 +234,7 @@ export default function QuizPage() {
                   </ul>
                 </div>
 
-                <CaptureForm />
+                <SendPulseForm />
               </div>
             )}
           </div>

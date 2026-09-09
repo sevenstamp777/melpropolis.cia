@@ -1,45 +1,8 @@
-import { useState } from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/SEO';
+import SendPulseForm from '../components/SendPulseForm';
 
 export default function ContatoPage() {
-  const [formData, setFormData] = useState({ nome: '', email: '', whatsapp: '', mensagem: '' });
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-
-    try {
-      const response = await fetch('/api/capture', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.nome,
-          email: formData.email,
-          whatsapp: formData.whatsapp,
-          message: formData.mensagem,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSuccess(true);
-        setFormData({ nome: '', email: '', whatsapp: '', mensagem: '' });
-      } else {
-        setError(data.error || 'Erro ao enviar. Tente novamente.');
-      }
-    } catch (err) {
-      setError('Erro de conexão. Tente novamente.');
-    }
-
-    setLoading(false);
-  };
-
   return (
     <Layout>
       <SEO
@@ -132,99 +95,16 @@ export default function ContatoPage() {
             </div>
 
             <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-8">
-              {success ? (
-                <div className="text-center py-8">
-                  <div className="text-5xl mb-4">✅</div>
-                  <h3 className="font-display text-2xl font-bold text-[var(--accent-light)] mb-2">
-                    Mensagem enviada!
-                  </h3>
-                  <p className="text-[var(--muted)] mb-6">
-                    Obrigado! Entraremos em contato pelo WhatsApp em breve.
-                  </p>
-                  <button
-                    onClick={() => setSuccess(false)}
-                    className="px-6 py-3 bg-[var(--accent)]/10 text-[var(--accent-light)] rounded-xl font-medium hover:bg-[var(--accent)]/20 transition-colors"
-                  >
-                    Enviar outra mensagem
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {error && (
-                    <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
-                      {error}
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="nome" className="block text-sm font-medium text-[var(--fg)] mb-2">
-                        Nome completo *
-                      </label>
-                      <input
-                        id="nome"
-                        type="text"
-                        value={formData.nome}
-                        onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                        placeholder="Seu nome completo"
-                        required
-                        className="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border)] focus:outline-none focus:border-[var(--accent)] transition-colors placeholder:text-[var(--muted)]"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-[var(--fg)] mb-2">
-                        E-mail *
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="seu@email.com"
-                        required
-                        className="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border)] focus:outline-none focus:border-[var(--accent)] transition-colors placeholder:text-[var(--muted)]"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="whatsapp" className="block text-sm font-medium text-[var(--fg)] mb-2">
-                      WhatsApp com DDD *
-                    </label>
-                    <input
-                      id="whatsapp"
-                      type="tel"
-                      value={formData.whatsapp}
-                      onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                      placeholder="(11) 99999-9999"
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border)] focus:outline-none focus:border-[var(--accent)] transition-colors placeholder:text-[var(--muted)]"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="mensagem" className="block text-sm font-medium text-[var(--fg)] mb-2">
-                      Mensagem
-                    </label>
-                    <textarea
-                      id="mensagem"
-                      value={formData.mensagem}
-                      onChange={(e) => setFormData({ ...formData, mensagem: e.target.value })}
-                      placeholder="Como podemos ajudar?"
-                      rows={4}
-                      className="w-full px-4 py-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border)] focus:outline-none focus:border-[var(--accent)] transition-colors placeholder:text-[var(--muted)] resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full px-8 py-4 bg-[var(--honey)] hover:bg-[var(--amber)] text-white font-semibold rounded-xl text-lg transition-all hover:shadow-lg hover:shadow-[var(--honey)]/30 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {loading ? 'Enviando...' : 'Enviar Mensagem'}
-                  </button>
-                </form>
-              )}
+              <div className="text-center mb-8">
+                <div className="text-5xl mb-4">🐝</div>
+                <h3 className="font-display text-2xl font-bold text-[var(--accent-light)] mb-2">
+                  Mande sua mensagem
+                </h3>
+                <p className="text-[var(--muted)]">
+                  Preencha os dados abaixo e retornaremos o mais breve possível.
+                </p>
+              </div>
+              <SendPulseForm variant="contato" />
             </div>
           </div>
         </section>

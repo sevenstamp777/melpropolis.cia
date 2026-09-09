@@ -28,6 +28,117 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* ---------------------------------------------------------
+   SendPulse form (id 255206) — re-skin com o tema do site
+   Sobrescreve o HTML de estilo injetado pelo loader (.sp-form).
+   Usa !important para vencer a cascata do conteúdo injetado.
+--------------------------------------------------------- */
+.sp-form[sp-id="255206"] {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 1rem !important;
+  padding: 1.5rem !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.sp-form[sp-id="255206"] .sp-form-fields-wrapper {
+  width: 100% !important;
+}
+
+/* Texto do cabeçalho do formulário (elemento "Texto") */
+.sp-form[sp-id="255206"] .sp-field > div[style*="line-height"] p {
+  color: var(--fg) !important;
+  font-weight: 600;
+}
+.sp-form[sp-id="255206"] .sp-field > div[style*="line-height"] p:first-child {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+.sp-form[sp-id="255206"] .sp-field > div[style*="line-height"] p:last-child {
+  font-weight: 400;
+  color: var(--muted) !important;
+  font-size: 0.95rem;
+}
+
+/* Labels */
+.sp-form[sp-id="255206"] .sp-field label {
+  color: var(--fg) !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+}
+
+/* Campos (input/textarea) */
+.sp-form[sp-id="255206"] textarea.sp-form-control,
+.sp-form[sp-id="255206"] input.sp-form-control {
+  background: var(--bg-subtle) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--fg) !important;
+  border-radius: 0.75rem !important;
+  padding: 0.75rem 1rem !important;
+  height: auto !important;
+  font-size: 0.95rem !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+.sp-form[sp-id="255206"] textarea.sp-form-control {
+  resize: none;
+}
+.sp-form[sp-id="255206"] input.sp-form-control:focus,
+.sp-form[sp-id="255206"] textarea.sp-form-control:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+}
+.sp-form[sp-id="255206"] input::placeholder,
+.sp-form[sp-id="255206"] textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+/* Botão */
+.sp-form[sp-id="255206"] .sp-button {
+  background-color: var(--honey) !important;
+  color: var(--bg) !important;
+  border-radius: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 0.9rem 2rem !important;
+  font-size: 1rem !important;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.sp-form[sp-id="255206"] .sp-button:hover {
+  background-color: var(--amber) !important;
+  box-shadow: 0 10px 20px rgba(196, 130, 12, 0.3);
+}
+.sp-form[sp-id="255206"] .sp-button-container {
+  text-align: right !important;
+}
+
+/* Mensagem de sucesso/erro pós-submissão */
+.sp-form[sp-id="255206"] .sp-message {
+  color: var(--muted);
+}
+.sp-form[sp-id="255206"] .sp-message.sp-message-success {
+  color: var(--amber);
+}
+.sp-form[sp-id="255206"] .sp-message.sp-message-error {
+  color: #e85050;
+}
+
+/* Rodapé "Desenvolvido por SendPulse" */
+.sp-form[sp-id="255206"] .sp-link-wrapper {
+  margin-top: 0.75rem;
+}
+.sp-form[sp-id="255206"] a.sp-link {
+  color: var(--muted) !important;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+/* Campo "Mensagem" injetado (variante contato) */
+.sp-form[sp-id="255206"] .sp-field-input-msg {
+  margin-top: 1rem;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
