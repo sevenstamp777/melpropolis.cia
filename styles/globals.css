@@ -101,6 +101,8 @@ body {
   color: var(--bg) !important;
   border-radius: 0.75rem !important;
   font-weight: 600 !important;
+  height: auto !important;
+  line-height: 1.5 !important;
   padding: 0.9rem 2rem !important;
   font-size: 1rem !important;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
@@ -124,14 +126,9 @@ body {
   color: #e85050;
 }
 
-/* Rodapé "Desenvolvido por SendPulse" */
+/* Rodapé "Desenvolvido por SendPulse" — ocultado por solicitação do usuário */
 .sp-form[sp-id="255206"] .sp-link-wrapper {
-  margin-top: 0.75rem;
-}
-.sp-form[sp-id="255206"] a.sp-link {
-  color: var(--muted) !important;
-  font-size: 0.75rem;
-  text-decoration: none;
+  display: none !important;
 }
 
 /* Campo "Mensagem" injetado (variante contato) */

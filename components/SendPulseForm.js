@@ -106,6 +106,9 @@ export default function SendPulseForm({ variant = 'captura' }) {
       const button = host.querySelector('.sp-button');
       if (!container || !button) return;
 
+      // remove o rodapé "Desenvolvido por SendPulse"
+      host.querySelectorAll('.sp-link-wrapper').forEach((el) => el.remove());
+
       if (button.textContent.trim() !== submitLabel) {
         button.textContent = submitLabel;
       }
