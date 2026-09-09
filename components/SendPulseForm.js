@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-const FORM_ID = '8e740fb6bd6f42140e373377251f28979fc79dd3ae517a98e27c626406b368a4';
+const FORM_HASH = '8e740fb6bd6f42140e373377251f28979fc79dd3ae517a98e27c626406b368a4';
+const FORM_NUM = '255206';
 const LOADER_SRC = 'https://web.webformscr.com/apps/fc3/build/loader.js';
 const MESSAGE_NAME = 'sform[mensagem]';
-// host usado pelo loader: `//<host>/formstore/<id>.js` (o caminho /apps/fc3/
-// é do próprio loader, não do formstore)
+const MESSAGE_INPUT_CLS = 'sp-field-input-msg';
+// host usado pelo loader: `//<host>/formstore/<id>.js` (o /apps/fc3/ é só do loader)
 const FORMSTORE_BASE = 'https://web.webformscr.com/formstore';
 const HANDLER_SRC = 'https://web.webformscr.com/apps/fc3/build/default-handler.js';
 
@@ -13,12 +14,12 @@ let formstorePromise = null;
 let handlerPromise = null;
 let manualProcessing = false;
 
-function formstoreUrl() {
-  return `${FORMSTORE_BASE.replace(/^https?:/, window.location.protocol)}/${FORM_ID}.js`;
+function formPresent() {
+  return !!document.querySelector(`.sp-form[sp-id="${FORM_NUM}"]`);
 }
 
-function formPresent() {
-  return !!document.getElementById(`sp-form-${FORM_ID}`);
+function pendingFormstoreScript() {
+  return document.querySelector(`script[src*="/formstore/${FORM_HASH}.js"]`);
 }
 
 async function fetchFormstore() {
@@ -26,7 +27,7 @@ async function fetchFormstore() {
   if (formstorePromise) return formstorePromise;
 
   formstorePromise = (async () => {
-    const res = await fetch(formstoreUrl());
+    const res = await fetch(`${FORMSTORE_BASE.replace(/^https?:/, window.location.protocol)}/${FORM_HASH}.js`);
     if (!res.ok) throw new Error('formstore HTTP ' + res.status);
     const text = await res.text();
     const start = text.indexOf('(');
@@ -63,9 +64,10 @@ async function processManual(script) {
   if (manualProcessing) return;
   manualProcessing = true;
 
-  // se o loader original já tinha disparado o JSONP do formstore,
-  // ninguém deve consumi-lo (o processamento agora é nosso)
-  window[`_jsonp_${FORM_ID}`] = () => {};
+  // desativa o caminho do loader (JSONP já disparado fica inerte)
+  window[`_jsonp_${FORM_HASH}`] = () => {};
+  const pending = pendingFormstoreScript();
+  if (pending && pending.parentNode) pending.parentNode.removeChild(pending);
 
   try {
     const html = await fetchFormstore();
@@ -91,6 +93,7 @@ async function processManual(script) {
 export default function SendPulseForm({ variant = 'captura' }) {
   const hostRef = useRef(null);
   const showMessage = variant === 'contato';
+  const submitLabel = variant === 'contato' ? 'Enviar' : 'Inscrever-se';
 
   useEffect(() => {
     const host = hostRef.current;
@@ -98,13 +101,20 @@ export default function SendPulseForm({ variant = 'captura' }) {
 
     let observer;
 
-    const injectMessageField = () => {
-      if (!showMessage) return;
+    const applyCustomizations = () => {
       const container = host.querySelector('.sp-element-container');
-      if (!container || container.querySelector('.sp-field-input-msg')) return;
+      const button = host.querySelector('.sp-button');
+      if (!container || !button) return;
+
+      if (button.textContent.trim() !== submitLabel) {
+        button.textContent = submitLabel;
+      }
+
+      if (!showMessage) return;
+      if (container.querySelector(`.${MESSAGE_INPUT_CLS}`)) return;
 
       const field = document.createElement('div');
-      field.className = 'sp-field sp-field-full-width sp-field-input-msg';
+      field.className = `sp-field sp-field-full-width ${MESSAGE_INPUT_CLS}`;
 
       const label = document.createElement('label');
       label.className = 'sp-control-label';
@@ -121,29 +131,72 @@ export default function SendPulseForm({ variant = 'captura' }) {
 
       field.appendChild(label);
       field.appendChild(textarea);
-      container.appendChild(field);
+
+      // o botão deve ser o último campo: mensagem entra ANTES dele
+      const buttonField = container.querySelector('.sp-field.sp-button-container');
+      if (buttonField) {
+        container.insertBefore(field, buttonField);
+      } else {
+        container.appendChild(field);
+      }
+    };
+
+    const waitForForm = (script, delay, onTimeout) => {
+      const giveUpAt = Date.now() + delay;
+      const poll = () => {
+        if (formPresent()) return;
+        if (Date.now() >= giveUpAt) {
+          onTimeout();
+          return;
+        }
+        setTimeout(poll, 150);
+      };
+      poll();
     };
 
     const script = document.createElement('script');
     script.src = LOADER_SRC;
     script.async = true;
-    script.setAttribute('sp-form-id', FORM_ID);
+    script.setAttribute('sp-form-id', FORM_HASH);
     script.onload = () => {
-      observer = new MutationObserver(() => injectMessageField());
+      observer = new MutationObserver(() => applyCustomizations());
       observer.observe(host, { childList: true, subtree: true });
-      injectMessageField();
+      applyCustomizations();
 
-      if (window.spFormLoaderAdded) {
-        // loader já rodou neste contexto → forma injetada pelo React após o
-        // window.load não passará pelo loader. Espera o JSONP nativo ter
-        // chance de entregar, senão processa manualmente.
-        setTimeout(() => {
+      // O loader registra o processamento no evento load. Duas possibilidades:
+      // 1) load ainda não disparou (página em hidratação): o loader VAI
+      //    processar o formulário — só agimos se após o load ele não aparecer.
+      // 2) load já disparou (form montado após o load, ex.: /quiz): o script
+      //    do loader não será processado — fazemos fallback manual.
+      const onLoadFired = () => {
+        window.removeEventListener('load', onLoadFired);
+        waitForForm(script, 1200, () => {
           if (!formPresent() && script.dataset.processed !== '1') {
-            processManual(script).catch((err) =>
-              console.error('[SendPulseForm] falha no fallback:', err)
-            );
+            processManual(script).catch((err) => console.error('[SendPulseForm] falha no fallback:', err));
           }
-        }, 600);
+        });
+      };
+
+      if (document.readyState === 'complete') {
+        // load pode ter disparado antes do onload do script: cede uma chance
+        // ao loader (JSONP) e só então faz fallback
+        waitForForm(script, 1200, () => {
+          if (!formPresent() && script.dataset.processed !== '1') {
+            processManual(script).catch((err) => console.error('[SendPulseForm] falha no fallback:', err));
+          }
+        });
+      } else {
+        setTimeout(() => {
+          if (document.readyState === 'complete') {
+            waitForForm(script, 1200, () => {
+              if (!formPresent() && script.dataset.processed !== '1') {
+                processManual(script).catch((err) => console.error('[SendPulseForm] falha no fallback:', err));
+              }
+            });
+          } else {
+            window.addEventListener('load', onLoadFired, { once: false });
+          }
+        }, 300);
       }
     };
     host.appendChild(script);
@@ -151,7 +204,7 @@ export default function SendPulseForm({ variant = 'captura' }) {
     return () => {
       if (observer) observer.disconnect();
     };
-  }, [showMessage]);
+  }, [showMessage, submitLabel]);
 
   return <div ref={hostRef} className="sendpulse-form" data-variant={variant} />;
 }
