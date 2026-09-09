@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Layout from '../components/layout';
+import SEO from '../components/SEO';
 import CaptureForm from '../components/CaptureForm';
 
 export default function QuizPage() {
@@ -97,6 +98,11 @@ export default function QuizPage() {
 
   return (
     <Layout>
+      <SEO
+        title="Descubra Seu Produto Ideal"
+        description="Responda 4 perguntas rápidas e receba a recomendação personalizada de mel ou própolis para o seu perfil. Garanta 15% de desconto no primeiro pedido."
+        path="/quiz"
+      />
       <main className="min-h-screen bg-[var(--bg)] py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           {/* Quiz Header */}

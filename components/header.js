@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Header() {
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-[var(--bg)]/80 border-b border-[var(--border)]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -42,14 +45,52 @@ export default function Header() {
             </a>
 
             {/* Mobile menu button */}
-            <button className="md:hidden p-2 text-[var(--muted)] hover:text-[var(--fg)]" aria-label="Menu">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <button
+              className="md:hidden p-2 text-[var(--muted)] hover:text-[var(--fg)]"
+              aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={open}
+              onClick={() => setOpen(!open)}
+            >
+              {open ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 6l12 12M6 18L18 6" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
         </nav>
       </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <div className="md:hidden border-t border-[var(--border)] bg-[var(--bg-subtle)] px-4 py-4 flex flex-col gap-2">
+          <Link href="/" onClick={close} className="px-3 py-2 text-[var(--muted)] hover:text-[var(--fg)] hover:bg-[var(--border)] rounded-lg text-sm font-medium transition-colors">
+            Início
+          </Link>
+          <Link href="/#produtos" onClick={close} className="px-3 py-2 text-[var(--muted)] hover:text-[var(--fg)] hover:bg-[var(--border)] rounded-lg text-sm font-medium transition-colors">
+            Produtos
+          </Link>
+          <Link href="/sobre" onClick={close} className="px-3 py-2 text-[var(--muted)] hover:text-[var(--fg)] hover:bg-[var(--border)] rounded-lg text-sm font-medium transition-colors">
+            Sobre
+          </Link>
+          <Link href="/contato" onClick={close} className="px-3 py-2 text-[var(--muted)] hover:text-[var(--fg)] hover:bg-[var(--border)] rounded-lg text-sm font-medium transition-colors">
+            Contato
+          </Link>
+          <a
+            href="https://wa.me/5518997130824"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 flex items-center justify-center gap-2 px-4 py-2 bg-[var(--honey)] hover:bg-[var(--amber)] text-[var(--bg)] text-sm font-medium rounded-lg transition-all"
+          >
+            <span>💬</span>
+            <span>Fale Conosco</span>
+          </a>
+        </div>
+      )}
     </header>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Layout from '../components/layout';
+import SEO from '../components/SEO';
 
 export default function ContatoPage() {
   const [formData, setFormData] = useState({ nome: '', email: '', whatsapp: '', mensagem: '' });
@@ -41,6 +42,11 @@ export default function ContatoPage() {
 
   return (
     <Layout>
+      <SEO
+        title="Contato"
+        description="Tire dúvidas sobre nossos produtos de mel, própolis e geleia real. Atendimento pelo WhatsApp (18) 99713-0824, e-mail e formulário. Respondemos em até 24h."
+        path="/contato"
+      />
       <main className="min-h-screen bg-[var(--bg)]">
         {/* Hero Section */}
         <section className="py-20 border-b border-[var(--border)]">

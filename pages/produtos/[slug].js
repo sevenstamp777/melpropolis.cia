@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import Layout from '../../components/layout';
+import SEO from '../../components/SEO';
 
 export async function getStaticPaths() {
   const productsDirectory = path.join(process.cwd(), 'content/products');
@@ -33,6 +34,13 @@ export default function ProductDetailPage({ product }) {
 
   return (
     <Layout>
+      <SEO
+        title={product.name}
+        description={`${product.name} - ${product.subtitle}. ${product.price}. ${product.description}`.slice(0, 160)}
+        path={`/produtos/${product.id}`}
+        image={product.image}
+        type="product"
+      />
       <main className="min-h-screen bg-[var(--bg)]">
         {/* Breadcrumb */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">

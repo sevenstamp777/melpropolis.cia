@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Layout from '../components/layout';
+import SEO from '../components/SEO';
 import ProductCard from '../components/ProductCard';
 
 export async function getStaticProps() {
@@ -22,6 +23,11 @@ export async function getStaticProps() {
 export default function Home({ products }) {
   return (
     <Layout>
+      <SEO
+        title="Mel Puro, Própolis e Produtos Naturais do Apiário"
+        description="Mel de abelha puro, própolis, geleia real e produtos naturais direto do apiário em São Paulo. Qualidade premium, 100% natural e rastreável. Compra pela WhatsApp com entrega em todo o Brasil."
+        path="/"
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-[var(--border)]">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--honey)]/20 via-[var(--accent-light)]/10 to-transparent" />

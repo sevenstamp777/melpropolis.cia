@@ -1,8 +1,14 @@
 import Layout from '../components/layout';
+import SEO from '../components/SEO';
 
 export default function SobrePage() {
   return (
     <Layout>
+      <SEO
+        title="Sobre Nós"
+        description="Conheça a Mel, Própolis & Cia: mel e produtos apícolas 100% naturais, direto do apiário para sua casa, com qualidade premium, rastreabilidade total e respeito às abelhas."
+        path="/sobre"
+      />
       <main className="min-h-screen bg-[var(--bg)]">
         <section className="py-24 border-b border-[var(--border)]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">

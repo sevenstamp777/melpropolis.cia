@@ -1,9 +1,15 @@
 import Layout from '../components/layout';
+import SEO from '../components/SEO';
 import CaptureForm from '../components/CaptureForm';
 
 export default function CapturaPage() {
   return (
     <Layout>
+      <SEO
+        title="Comunidade de Saúde Natural"
+        description="Junte-se à comunidade da Mel, Própolis & Cia e receba dicas exclusivas de saúde natural, novidades do apiário e ofertas especiais direto no WhatsApp. Ganhe um e-book de brinde."
+        path="/captura"
+      />
       <main className="min-h-screen bg-[var(--bg)]">
         {/* Hero Section */}
         <section className="py-24 border-b border-[var(--border)]">
