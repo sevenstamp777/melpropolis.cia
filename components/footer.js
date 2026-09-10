@@ -47,7 +47,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-[var(--fg)] mb-4 text-sm">Contato</h4>
             <ul className="space-y-2 text-sm text-[var(--muted)]">
-              <li>{process.env.NEXT_PUBLIC_EMAIL || 'melpropolis.cia@gmail.com'}</li>
+              <li>{process.env.NEXT_PUBLIC_EMAIL || 'contato@melpropolis.com.br'}</li>
               <li>
                 <a
                   href="https://wa.me/5518997130824"
