@@ -43,8 +43,8 @@ export default function ContatoPage() {
                   icon: '📧',
                   title: 'E-mail',
                   desc: 'Respostas em até 24h',
-                  value: 'melpropolis.cia@gmail.com',
-                  action: 'mailto:melpropolis.cia@gmail.com',
+                  value: 'contato@melpropolis.com.br',
+                  action: 'mailto:contato@melpropolis.com.br',
                 },
                 {
                   icon: '📍',
