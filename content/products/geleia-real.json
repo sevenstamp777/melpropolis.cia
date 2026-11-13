@@ -4,7 +4,7 @@
   "subtitle": "O elixir da natureza",
   "category": "Geleia Real",
   "strength": "Pura",
-  "description": "Geleia real fresca, colhida diretamente das colmeias. Rico em vitaminas, minerais, aminoácidos e ácido 10-HDA. Considerado o suplemento natural mais completo da natureza.",
+  "description": "Geleia real fresca, com origem rastreada e inspecionada. Rica em vitaminas, minerais, aminoácidos e ácido 10-HDA. Considerado o suplemento natural mais completo da natureza.",
   "benefits": [
     "Fortalece o sistema imunológico",
     "Melhora a disposição e energia",
@@ -19,7 +19,7 @@
   "image": "/products/geleia-real.jpg",
   "certifications": ["Pura", "Artesanal", "Rastreável"],
   "ingredients": ["Geleia real fresca (100%)"],
-  "origin": "Apiário próprio, cerrado brasileiro",
+  "origin": "Cerrado brasileiro",
   "weight": 0.015,
   "price": "R$ 169,00",
   "oldPrice": ""

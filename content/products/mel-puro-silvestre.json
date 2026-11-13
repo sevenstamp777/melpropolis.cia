@@ -4,7 +4,7 @@
   "subtitle": "Mel cru florada silvestre em pote de vidro",
   "category": "Mel",
   "strength": "100% cru e puro",
-  "description": "Mel de florada silvestre, multifloral por natureza, em embalagem de vidro gourmet. Mel 100% puro, cru, que adoça bem sem alterar o sabor dos alimentos. Perfeito para receitas e para misturar com todo tipo de alimento. Direto do produtor, produzido artesanalmente com certificado de qualidade.",
+  "description": "Mel de florada silvestre, multifloral por natureza, em embalagem de vidro gourmet. Mel 100% puro, cru, que adoça bem sem alterar o sabor dos alimentos. Perfeito para receitas e para misturar com todo tipo de alimento. Origem rastreada e inspecionada.",
   "benefits": [
     "Fonte natural de energia",
     "Fortalece o sistema imunológico",
@@ -19,7 +19,7 @@
   "image": "/products/mel-puro-silvestre.jpg",
   "certifications": ["Cru", "Puro", "Artesanal", "Marca Iraê"],
   "ingredients": ["Mel de flores silvestres (100%)"],
-  "origin": "Apiário em Itu, São Paulo, SP – Brasil",
+  "origin": "Itu, São Paulo, SP – Brasil",
   "weight": 0.45,
   "price": "R$ 45,00",
   "oldPrice": ""
