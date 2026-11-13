@@ -14,7 +14,7 @@ Este guia mostra como configurar o webhook do Google Apps Script para receber le
 3. Cole o código do arquivo `scripts/google-apps-script.js`
 
 ### Passo 3: Configure e Implante
-1. **Salve** o script (Ctrl+S) → Nomeie: "Webhook Leads Apiários"
+1. **Salve** o script (Ctrl+S) → Nomeie: "Webhook Leads"
 2. **Implantar** (canto superior direito) > **Nova implantação**
 3. **Tipo**: Selecione ⚙️ **Aplicativo Web**
 4. **Descrição**: "Webhook captura leads site"

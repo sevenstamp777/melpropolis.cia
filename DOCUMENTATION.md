@@ -1,4 +1,4 @@
-# Documentação Técnica - Site de Produtos Apiários & Cia
+# Documentação Técnica - Site de Produtos Mel, Própolis & Cia
 
 **Versão:** 1.0  
 **Data:** 2026-08-26  
@@ -219,7 +219,7 @@ products-site/
 Usado em **todas** as páginas via `_app.js` (implícito).
 
 ### 6.2 `header.js` - Cabeçalho
-- Logo + nome "Apiários & Cia"
+- Logo + nome "Mel, Própolis & Cia"
 - Navegação: Início, Produtos, Sobre, Contato
 - CTA WhatsApp (desktop)
 - Hamburger menu (mobile - *não implementado ainda*)

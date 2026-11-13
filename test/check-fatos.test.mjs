@@ -86,3 +86,60 @@ test('CLI sai com codigo 1 quando encontra violacao', () => {
   assert.equal(r.status, 1)
   assert.match(r.stdout, /99713-0824/)
 })
+
+test('detecta direto do apiario em qualquer caixa', () => {
+  const dir = fixture({ 'pages/a.js': '🐝 100% Natural · Direto do Apiário\n' })
+  const v = findViolations({ roots: [dir] })
+  assert.equal(v.length, 1)
+  assert.equal(v[0].rule, 'procedencia-apiario')
+})
+
+test('detecta apiario sem acento e em maiusculas', () => {
+  const dir = fixture({ 'content/p.json': '{"origin":"APIARIO em Itu"}\n' })
+  const v = findViolations({ roots: [dir] })
+  assert.equal(v.length, 1)
+  assert.equal(v[0].rule, 'procedencia-apiario')
+})
+
+test('detecta o nome antigo Apiarios', () => {
+  const dir = fixture({ 'DOCUMENTATION.md': '# Site de Produtos Apiários & Cia\n' })
+  const v = findViolations({ roots: [dir] })
+  assert.equal(v.length, 1)
+  assert.equal(v[0].rule, 'procedencia-apiario')
+})
+
+test('nao acusa texto de biologia sobre abelhas', () => {
+  const dir = fixture({
+    'pages/b.js': 'Própolis é uma resina coletada pelas abelhas para proteger a colmeia.\n',
+    'content/j.json': '{"description":"produzido pela abelha nativa brasileira sem ferrão"}\n',
+  })
+  assert.deepEqual(findViolations({ roots: [dir] }), [])
+})
+
+test('detecta afirmacoes em primeira pessoa de producao', () => {
+  const casos = [
+    'Desde então, dedicamo-nos a produzir produtos apícolas.',
+    'Cada produto é cuidadosamente extraído e embalado.',
+    'Mel puro em balde, direto do produtor',
+    'Geleia real fresca, colhida diretamente das colmeias.',
+    'Nós produzimos mel.',
+  ]
+  for (const texto of casos) {
+    const dir = fixture({ 'pages/a.js': `${texto}\n` })
+    const v = findViolations({ roots: [dir] })
+    assert.equal(v.length, 1, `deveria acusar: ${texto}`)
+    assert.equal(v[0].rule, 'producao-propria')
+  }
+})
+
+test('detecta claims de terceiros sem fonte', () => {
+  const dir = fixture({ 'content/p.json': '{"description":"por pequenos produtores com certificado de qualidade"}\n' })
+  const v = findViolations({ roots: [dir] })
+  assert.equal(v.length, 1)
+  assert.equal(v[0].rule, 'claim-sem-fonte')
+})
+
+test('aceita a formulacao aprovada', () => {
+  const dir = fixture({ 'pages/a.js': 'Produtos apícolas 100% naturais, com origem rastreada e inspecionada.\n' })
+  assert.deepEqual(findViolations({ roots: [dir] }), [])
+})

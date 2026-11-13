@@ -15,6 +15,28 @@ export const RULES = [
     patterns: ['99713-0824', '997130824', '5518997130824'],
     message: 'Número antigo do WhatsApp. O oficial é (18) 99612-8381 (5518996128381).',
   },
+  {
+    id: 'procedencia-apiario',
+    patterns: ['apiário', 'apiario'],
+    message: 'Menção a apiário como procedência (ou nome antigo do site). Use "origem rastreada e inspecionada" e a marca "Mel, Própolis & Cia".',
+  },
+  {
+    id: 'producao-propria',
+    patterns: [
+      'direto do produtor',
+      'colhida diretamente',
+      'colhido diretamente',
+      'extraído e embalado',
+      'dedicamo-nos a produzir',
+      'produzimos',
+    ],
+    message: 'Afirmação de produção/colheita própria. Use "origem rastreada e inspecionada".',
+  },
+  {
+    id: 'claim-sem-fonte',
+    patterns: ['pequenos produtores', 'certificado de qualidade'],
+    message: 'Claim de terceiro sem fonte nomeada. Remova ou nomeie quem certifica/produz.',
+  },
 ]
 
 const TEXT_EXTENSIONS = new Set([
@@ -71,7 +93,7 @@ function collectFiles(dir, out) {
 
 function ruleRegex(rule) {
   const escaped = rule.patterns.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-  return new RegExp(escaped.join('|'))
+  return new RegExp(escaped.join('|'), 'i')
 }
 
 // Devolve [{ file, line, text, rule }] para cada linha que contenha um padrão proibido.

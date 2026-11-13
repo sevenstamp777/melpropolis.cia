@@ -9,7 +9,7 @@ Este guia mostra como configurar um webhook no Google Apps Script para receber l
 ### 1. Crie a Planilha
 1. Acesse [sheets.google.com](https://sheets.google.com)
 2. Clique em **"+" em branco** para nova planilha
-3. Nomeie: **"Leads - Apiários & Cia"**
+3. Nomeie: **"Leads - Mel, Própolis & Cia"**
 4. Na linha 1 (cabeçalho), coloque:
    | A | B | C | D | E |
    |---|---|---|---|---|
@@ -125,7 +125,7 @@ function testDoPost() {
 
 ## ⚙️ Configuração da Implantação
 
-1. **Salve** o script (Ctrl+S) → Nomeie: "Webhook Leads Apiários"
+1. **Salve** o script (Ctrl+S) → Nomeie: "Webhook Leads"
 2. **Implantar** (canto superior direito) > **Nova implantação**
 3. **Tipo**: Selecione ⚙️ **Aplicativo Web**
 4. **Descrição**: "Webhook captura leads site"
