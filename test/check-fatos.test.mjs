@@ -122,6 +122,7 @@ test('detecta afirmacoes em primeira pessoa de producao', () => {
     'Cada produto é cuidadosamente extraído e embalado.',
     'Mel puro em balde, direto do produtor',
     'Geleia real fresca, colhida diretamente das colmeias.',
+    'O mel é colhido diretamente das colmeias.',
     'Nós produzimos mel.',
   ]
   for (const texto of casos) {
@@ -132,11 +133,32 @@ test('detecta afirmacoes em primeira pessoa de producao', () => {
   }
 })
 
-test('detecta claims de terceiros sem fonte', () => {
-  const dir = fixture({ 'content/p.json': '{"description":"por pequenos produtores com certificado de qualidade"}\n' })
+test('detecta o claim "pequenos produtores" isoladamente', () => {
+  const dir = fixture({ 'content/p.json': '{"description":"por pequenos produtores"}\n' })
   const v = findViolations({ roots: [dir] })
   assert.equal(v.length, 1)
   assert.equal(v[0].rule, 'claim-sem-fonte')
+})
+
+test('detecta o claim "certificado de qualidade" isoladamente', () => {
+  const dir = fixture({ 'content/p.json': '{"description":"com certificado de qualidade"}\n' })
+  const v = findViolations({ roots: [dir] })
+  assert.equal(v.length, 1)
+  assert.equal(v[0].rule, 'claim-sem-fonte')
+})
+
+test('detecta selo e certificacao sem emissor nomeado', () => {
+  for (const texto of ['🛡️ Selo de Qualidade', 'Selo Verde', 'Própolis orgânico']) {
+    const dir = fixture({ 'pages/a.js': `${texto}\n` })
+    const v = findViolations({ roots: [dir] })
+    assert.equal(v.length, 1, `deveria acusar: ${texto}`)
+    assert.equal(v[0].rule, 'claim-sem-fonte')
+  }
+})
+
+test('nao acusa apicultura nem meliponicultura', () => {
+  const dir = fixture({ 'pages/a.js': 'Fundada por entusiastas da apicultura.\nMeliponicultura brasileira, abelha nativa sem ferrão.\n' })
+  assert.deepEqual(findViolations({ roots: [dir] }), [])
 })
 
 test('aceita a formulacao aprovada', () => {

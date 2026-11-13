@@ -187,10 +187,10 @@ Recriar as strings com o travessão en dash (`–`), não com hífen.
 Run: `grep -rniE "api[aá]rio|direto do produtor|colhida diretamente|nosso próprio apiário|pequenos produtores|certificado de qualidade" content/products`
 Expected: nenhuma saída (exit 1).
 
-- [ ] **Step 5: Verificar que os 11 JSONs continuam válidos e com o en dash**
+- [ ] **Step 5: Verificar que os 9 JSONs continuam válidos e com o en dash**
 
-Run: `node -e "const fs=require('fs'),p='content/products/';for(const f of fs.readdirSync(p)){JSON.parse(fs.readFileSync(p+f));}console.log('11 JSONs validos')"`
-Expected: `11 JSONs validos`
+Run: `node -e "const fs=require('fs'),p='content/products/';for(const f of fs.readdirSync(p)){JSON.parse(fs.readFileSync(p+f));}console.log('9 JSONs validos')"`
+Expected: `9 JSONs validos`
 
 Run: `grep -c "–" content/products/*.json | grep -v ":0" | wc -l`
 Expected: `6` (balde, cacau, composto, cremoso, gourmet, puro — um en dash cada).

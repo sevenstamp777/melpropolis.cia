@@ -75,7 +75,7 @@ export default function Home({ products }) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
               { icon: '🌿', label: '100% Natural' },
-              { icon: '🛡️', label: 'Selo de Qualidade' },
+              { icon: '🛡️', label: 'Qualidade Premium' },
               { icon: '🚚', label: 'Entrega Garantida' },
               { icon: '📦', label: 'Rastreabilidade' },
             ].map((item, idx) => (

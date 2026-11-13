@@ -34,7 +34,7 @@ export const RULES = [
   },
   {
     id: 'claim-sem-fonte',
-    patterns: ['pequenos produtores', 'certificado de qualidade'],
+    patterns: ['pequenos produtores', 'certificado de qualidade', 'selo de qualidade', 'selo verde', 'orgânico'],
     message: 'Claim de terceiro sem fonte nomeada. Remova ou nomeie quem certifica/produz.',
   },
 ]

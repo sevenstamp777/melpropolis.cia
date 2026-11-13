@@ -72,7 +72,7 @@ consumidor, e não só com posicionamento.
 | `balde-mel-5kg-silvestre.json` | certifications | "Direto do produtor" → "Origem rastreada" |
 | `mel-gourmet-silvestre.json` | description | sai "Direto do apiário" |
 | `mel-cremoso-capixingui.json` | description | "direto do apiário em Itapetininga" → "em Itapetininga" (mantém a marca Iraê) |
-| `mel-composto-mel-pimenta.json` | subtitle | "Blend Terroir do nosso próprio apiário" → "Linha Terroir" |
+| `mel-composto-mel-pimenta.json` | subtitle | "Blend Terroir do nosso próprio apiário" → "Blend Terroir" |
 | `mel-composto-mel-pimenta.json` | description | "floradas especiais do nosso próprio apiário" → "floradas especiais selecionadas" |
 
 ### Campo `origin` (8)
@@ -140,3 +140,18 @@ Três decisões tomadas durante a execução, todas registradas:
 Resultado verificado: 29 pontos corrigidos, 17 testes passando, probe contra o
 conteúdo anterior (`git show 36de2e7`) acusa 8 violações com exit 1, e
 `npm run build` fecha em 17/17 páginas.
+
+## Pós-revisão (12/11/2026)
+
+A revisão final não encontrou Critical. Dois achados Important eram da mesma
+classe do que já estava sendo removido — selos sem emissor nomeado:
+
+- `pages/index.js:78` — badge "Selo de Qualidade" → "Qualidade Premium".
+- `content/products/propolis-verde-30.json:20` — `["Orgânico", "Selo Verde",
+  "Rastreável"]` → `["Puro", "Artesanal", "Rastreável"]`. "Orgânico" é claim
+  regulado no Brasil e exige certificador nomeado.
+
+Para que não voltem, `claim-sem-fonte` passou a cobrir também "selo de
+qualidade", "selo verde" e "orgânico" (20 testes). O teste dessa regra foi
+dividido por padrão, e entraram coberturas de "colhido diretamente" e dos
+falsos positivos "apicultura"/"meliponicultura".
