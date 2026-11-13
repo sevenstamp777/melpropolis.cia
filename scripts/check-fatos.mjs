@@ -2,8 +2,8 @@
 // Verificador de fatos do site: falha quando um fato proibido aparece no conteúdo.
 // Sem dependências — roda em qualquer Node recente.
 
-import { readdirSync, readFileSync, statSync } from 'node:fs'
-import { dirname, extname, join, relative, resolve } from 'node:path'
+import { readdirSync, readFileSync, realpathSync, statSync } from 'node:fs'
+import { basename, dirname, extname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -17,14 +17,38 @@ export const RULES = [
   },
 ]
 
-export const DEFAULT_ROOTS = ['components', 'pages', 'data', 'public'].map((dir) => join(REPO_ROOT, dir))
-
 const TEXT_EXTENSIONS = new Set([
   '.js', '.jsx', '.mjs', '.cjs', '.ts', '.tsx',
   '.json', '.md', '.mdx', '.html', '.css', '.txt', '.svg',
 ])
 
 const SKIP_DIRECTORIES = new Set(['node_modules', '.next', '.vercel', '.git'])
+
+export const DEFAULT_ROOTS = [
+  ...['components', 'pages', 'content', 'public', 'data'].map((dir) => join(REPO_ROOT, dir)),
+  ...rootLevelTextFiles(),
+]
+
+// Arquivos soltos na raiz também são publicados/podem orientar o build
+// (README, vercel.json, configurações e o template de variáveis).
+function rootLevelTextFiles() {
+  const out = []
+  let entries = []
+  try {
+    entries = readdirSync(REPO_ROOT, { withFileTypes: true })
+  } catch {
+    return out
+  }
+  for (const entry of entries) {
+    if (!entry.isFile()) continue
+    const name = entry.name
+    if (name.startsWith('.env') && name !== '.env.example') continue // .env.local e afins não vão para o repo
+    if (name === '.env.example' || TEXT_EXTENSIONS.has(extname(name).toLowerCase())) {
+      out.push(join(REPO_ROOT, name))
+    }
+  }
+  return out
+}
 
 function collectFiles(dir, out) {
   let entries
@@ -66,7 +90,9 @@ export function findViolations({ roots = DEFAULT_ROOTS, rules = RULES } = {}) {
 
   const violations = []
   for (const file of files) {
-    if (!TEXT_EXTENSIONS.has(extname(file).toLowerCase())) continue
+    const ext = extname(file).toLowerCase()
+    const envTemplate = basename(file) === '.env.example'
+    if (!TEXT_EXTENSIONS.has(ext) && !envTemplate) continue
 
     let content
     try {
@@ -89,9 +115,18 @@ export function findViolations({ roots = DEFAULT_ROOTS, rules = RULES } = {}) {
   return violations
 }
 
-const invokedDirectly = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+// Compara os caminhos reais: se o script for chamado por symlink (hook, PATH, wrapper),
+// resolve(process.argv[1]) !== import.meta.url e a CLI seria ignorada em silêncio.
+function invokedDirectly() {
+  if (!process.argv[1]) return false
+  try {
+    return realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))
+  } catch {
+    return false
+  }
+}
 
-if (invokedDirectly) {
+if (invokedDirectly()) {
   const args = process.argv.slice(2)
   const roots = args.length > 0 ? args.map((arg) => resolve(arg)) : DEFAULT_ROOTS
   const violations = findViolations({ roots })

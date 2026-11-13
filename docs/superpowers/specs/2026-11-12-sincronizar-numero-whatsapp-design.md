@@ -96,3 +96,25 @@ copy.
 - Formato exato da saída do script (desde que legível).
 - Se vale acrescentar o hook `pre-push` além do `prebuild` — previsto como
   opcional; se entrar, usar `core.hooksPath` com hooks versionados, sem husky.
+
+## Atualização pós-revisão (12/11/2026)
+
+A revisão final encontrou cinco furos reais; todos corrigidos na mesma entrega:
+
+1. **O `prebuild` não rodava no deploy.** `vercel.json` usava
+   `buildCommand: "next build"`, que ignora hooks do npm. Trocado por
+   `"npm run build"` — o comando que o usuário digita continua `vercel --prod`;
+   só o build passou a executar a verificação antes de compilar.
+2. **Raízes incompletas.** Entraram `content/` (lido por `getStaticProps` em
+   `pages/index.js` e `pages/produtos/[slug].js`) e os arquivos de texto da raiz
+   (README, `vercel.json`, configurações e `.env.example`).
+3. **`.env.example` ainda tinha o número antigo** em `NEXT_PUBLIC_WHATSAPP`.
+   Corrigido para `189996128381`. A variável não é usada no código hoje.
+4. **Symlink dava passe falso.** A detecção de "executado diretamente" agora
+   compara caminhos reais (`realpathSync`); antes, rodar via symlink ou wrapper
+   de PATH saía com 0 sem imprimir nada.
+5. **`.env.example` era descartado pelo filtro de extensão** (`.example` não é
+   extensão de texto). Passou a ser reconhecido explicitamente.
+
+Efeito colateral desejado: como o build remoto agora roda o `prebuild`, a
+afirmação de proteção no deploy deixou de ser promessa e virou comportamento.
