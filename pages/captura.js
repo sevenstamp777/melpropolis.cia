@@ -7,7 +7,7 @@ export default function CapturaPage() {
     <Layout>
       <SEO
         title="Comunidade de Saúde Natural"
-        description="Junte-se à comunidade da Mel, Própolis & Cia e receba dicas exclusivas de saúde natural, novidades do apiário e ofertas especiais direto no WhatsApp. Ganhe um e-book de brinde."
+        description="Junte-se à comunidade da Mel, Própolis & Cia e receba dicas exclusivas de saúde natural, novidades dos nossos produtos e ofertas especiais direto no WhatsApp. Ganhe um e-book de brinde."
         path="/captura"
       />
       <main className="min-h-screen bg-[var(--bg)]">
@@ -22,7 +22,7 @@ export default function CapturaPage() {
                 Junte-se à nossa comunidade de quem entende verdadeira saúde
               </h1>
               <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed">
-                Receba dicas exclusivas sobre imunidade natural, novidades do apiário e ofertas especiais direto no seu WhatsApp. Mais de 2.000 pessoas já fazem parte desta comunidade.
+                Receba dicas exclusivas sobre imunidade natural, novidades dos nossos produtos e ofertas especiais direto no seu WhatsApp. Mais de 2.000 pessoas já fazem parte desta comunidade.
               </p>
             </div>
 

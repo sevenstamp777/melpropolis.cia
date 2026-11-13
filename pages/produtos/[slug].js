@@ -217,7 +217,7 @@ export default function ProductDetailPage({ product }) {
               Garanta o seu {product.name}
             </h2>
             <p className="text-[var(--muted)] text-lg mb-8 max-w-2xl mx-auto">
-              Qualidade assegurada direto do apiário. Fale conosco pelo WhatsApp e receba orientação personalizada.
+              Qualidade assegurada em cada lote, com origem rastreada e inspecionada. Fale conosco pelo WhatsApp e receba orientação personalizada.
             </p>
             <a
               href="https://wa.me/5518996128381"

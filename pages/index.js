@@ -24,8 +24,8 @@ export default function Home({ products }) {
   return (
     <Layout>
       <SEO
-        title="Mel Puro, Própolis e Produtos Naturais do Apiário"
-        description="Mel de abelha puro, própolis, geleia real e produtos naturais direto do apiário em São Paulo. Qualidade premium, 100% natural e rastreável. Compra pela WhatsApp com entrega em todo o Brasil."
+        title="Mel Puro, Própolis e Produtos Naturais Selecionados"
+        description="Mel de abelha puro, própolis, geleia real e produtos naturais com origem rastreada e inspecionada. Qualidade premium, 100% natural e rastreável. Compra pelo WhatsApp com entrega em todo o Brasil."
         path="/"
       />
       {/* Hero Section */}
@@ -37,7 +37,7 @@ export default function Home({ products }) {
               <img src="/logo.png" alt="Mel, Própolis & Cia" className="w-40 h-40 md:w-52 md:h-52 drop-shadow-lg rounded-full" />
             </div>
             <span className="inline-block px-3 py-1 rounded-full bg-[var(--accent)]/10 text-[var(--amber)] text-xs font-medium border border-[var(--amber)]/20 mb-6">
-              🐝 100% Natural · Direto do Apiário
+              🐝 100% Natural · Origem Rastreada
             </span>
             <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-[var(--fg)] mb-6 leading-tight">
               A natureza na sua
@@ -96,8 +96,7 @@ export default function Home({ products }) {
               Nossos Produtos
             </h2>
             <p className="text-[var(--muted)]">
-              Cada produto é cuidadosamente extraído e embalado para preservar todas 
-              as propriedades naturais que só o apiário oferece.
+              Cada produto é selecionado e inspecionado para preservar as propriedades naturais de cada florada.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

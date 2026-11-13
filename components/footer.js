@@ -16,7 +16,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-[var(--muted)] text-sm max-w-md leading-relaxed">
-              Produtos apícolas 100% naturais, direto do apiário para você. 
+              Produtos apícolas 100% naturais, com origem rastreada e inspecionada.
               Própolis verde, mel puro e derivados com qualidade premium.
             </p>
             <div className="flex gap-4 mt-6">

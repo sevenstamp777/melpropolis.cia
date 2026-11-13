@@ -6,7 +6,7 @@ export default function SobrePage() {
     <Layout>
       <SEO
         title="Sobre Nós"
-        description="Conheça a Mel, Própolis & Cia: mel e produtos apícolas 100% naturais, direto do apiário para sua casa, com qualidade premium, rastreabilidade total e respeito às abelhas."
+        description="Conheça a Mel, Própolis & Cia: mel e produtos apícolas 100% naturais, com origem rastreada e inspecionada, qualidade premium e respeito às abelhas."
         path="/sobre"
       />
       <main className="min-h-screen bg-[var(--bg)]">
@@ -17,7 +17,7 @@ export default function SobrePage() {
                 Sobre Nós
               </h1>
               <p className="text-[var(--muted)] max-w-2xl mx-auto leading-relaxed">
-                Na Mel, Própolis & Cia, temos orgulho de trabalhar diretamente com a natureza. Fundada em 2023 por entusiastas da apicultura, nossa missão é trazer para você os benefícios puros dos produtos da colmeia e do apiário, com qualidade excepcional e procedência transparente.
+                Na Mel, Própolis & Cia, fundada em 2023 por entusiastas da apicultura, selecionamos produtos apícolas de entreposto parceiro, com origem rastreada e inspecionada, para levar até você os benefícios puros dos produtos das abelhas.
               </p>
             </div>
 
@@ -28,7 +28,7 @@ export default function SobrePage() {
                   Nossa História
                 </h3>
                 <p className="text-[var(--muted)] text-sm">
-                  Tudo começou quando nosso fundador, Erick Garcia, descobriu os benefícios da própolis verde 30% para a saúde respiratória. Desde então, dedicamo-nos a produzir produtos apícolas de alta qualidade, conectando apiários locais com consumidores conscientes.
+                  Tudo começou quando nosso fundador, Erick Garcia, descobriu os benefícios da própolis verde 30% para a saúde respiratória. Desde então, selecionamos produtos apícolas de origem rastreada e inspecionada para consumidores que valorizam procedência.
                 </p>
               </div>
 
@@ -38,7 +38,7 @@ export default function SobrePage() {
                   Nossa Missão
                 </h3>
                 <p className="text-[var(--muted)] text-sm">
-                  Fornecer produtos apícolas 100% naturais, direto do apiário para a sua casa, com qualidade premium, rastreabilidade total e respeito ao meio ambiente e às abelhas.
+                  Fornecer produtos apícolas 100% naturais, com origem rastreada e inspecionada, qualidade premium e respeito ao meio ambiente e às abelhas.
                 </p>
               </div>
 
