@@ -7,7 +7,7 @@ export default function ContatoPage() {
     <Layout>
       <SEO
         title="Contato"
-        description="Tire dúvidas sobre nossos produtos de mel, própolis e geleia real. Atendimento pelo WhatsApp (18) 99713-0824, e-mail e formulário. Respondemos em até 24h."
+        description="Tire dúvidas sobre nossos produtos de mel, própolis e geleia real. Atendimento pelo WhatsApp (18) 99612-8381, e-mail e formulário. Respondemos em até 24h."
         path="/contato"
       />
       <main className="min-h-screen bg-[var(--bg)]">
@@ -36,8 +36,8 @@ export default function ContatoPage() {
                   icon: '📱',
                   title: 'WhatsApp',
                   desc: 'Atendimento rápido e direto',
-                  value: '(18) 99713-0824',
-                  action: 'https://wa.me/5518997130824',
+                  value: '(18) 99612-8381',
+                  action: 'https://wa.me/5518996128381',
                 },
                 {
                   icon: '📧',

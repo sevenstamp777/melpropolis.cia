@@ -185,8 +185,8 @@ const sections = [
           contato@melpropolis.com.br
         </a>{' '}
         ou pelo WhatsApp{' '}
-        <a href="https://wa.me/5518997130824" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:text-[var(--accent)] transition-colors">
-          (18) 99713-0824
+        <a href="https://wa.me/5518996128381" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:text-[var(--accent)] transition-colors">
+          (18) 99612-8381
         </a>
         .
       </p>

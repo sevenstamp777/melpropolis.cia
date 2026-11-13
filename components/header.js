@@ -35,7 +35,7 @@ export default function Header() {
           {/* CTA */}
           <div className="flex items-center gap-3">
             <a
-              href="https://wa.me/5518997130824"
+              href="https://wa.me/5518996128381"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-2 px-4 py-2 bg-[var(--honey)] hover:bg-[var(--amber)] text-[var(--bg)] text-sm font-medium rounded-lg transition-all hover:shadow-lg hover:shadow-[var(--honey)]/20"
@@ -81,7 +81,7 @@ export default function Header() {
             Contato
           </Link>
           <a
-            href="https://wa.me/5518997130824"
+            href="https://wa.me/5518996128381"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-1 flex items-center justify-center gap-2 px-4 py-2 bg-[var(--honey)] hover:bg-[var(--amber)] text-[var(--bg)] text-sm font-medium rounded-lg transition-all"

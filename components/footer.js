@@ -21,7 +21,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4 mt-6">
               <a
-                href="https://wa.me/5518997130824"
+                href="https://wa.me/5518996128381"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[var(--muted)] hover:text-[var(--amber)] transition-colors"
@@ -50,12 +50,12 @@ export default function Footer() {
               <li>{process.env.NEXT_PUBLIC_EMAIL || 'contato@melpropolis.com.br'}</li>
               <li>
                 <a
-                  href="https://wa.me/5518997130824"
+                  href="https://wa.me/5518996128381"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[var(--amber)] transition-colors"
                 >
-                  WhatsApp: (18) 99713-0824
+                  WhatsApp: (18) 99612-8381
                 </a>
               </li>
             </ul>
